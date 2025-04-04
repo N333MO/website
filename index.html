@@ -140,7 +140,7 @@
       left: 0;
       width: 110%;
       height: 110%;
-      background: url('photos/Default-Batman.jpg') center/cover;
+      background: url('Photos/Default-Batman.jpg') center/cover;
       filter: blur(15px);
       transform: scale(1.1);
       z-index: -1;
@@ -1072,20 +1072,20 @@
         <div class="settings-section">
           <h3>Desktop Background</h3>
           <div class="background-grid">
-            <div class="background-option active" data-bg="photos/Default-Batman.jpg">
-              <img src="photos/Default-Batman.jpg" alt="Dark City" class="background-image">
+            <div class="background-option active" data-bg="Photos/Default-Batman.jpg">
+              <img src="Photos/Default-Batman.jpg" alt="Dark City" class="background-image">
               <div class="background-label">Cover 1</div>
             </div>
-            <div class="background-option" data-bg="photos/badbih.png">
-              <img src="photos/badbih.png" alt="Night Skyline" class="background-image">
+            <div class="background-option" data-bg="Photos/badbih.png">
+              <img src="Photos/badbih.png" alt="Night Skyline" class="background-image">
               <div class="background-label">Cover 2</div>
             </div>
-            <div class="background-option" data-bg="photos/Forest.png">
-              <img src="photos/Forest.png" alt="Rainy Night" class="background-image">
+            <div class="background-option" data-bg="Photos/Forest.png">
+              <img src="Photos/Forest.png" alt="Rainy Night" class="background-image">
               <div class="background-label">Cover 3</div>
             </div>
-            <div class="background-option" data-bg="photos/batman4.jpg">
-              <img src="photos/batman4.jpg" alt="Tech Hub" class="background-image">
+            <div class="background-option" data-bg="Photos/batman4.jpg">
+              <img src="Photos/batman4.jpg" alt="Tech Hub" class="background-image">
               <div class="background-label">Cover 4</div>
             </div>
           </div>
@@ -1235,7 +1235,7 @@
         
         <div class="player-footer">
           <div class="now-playing" id="nowPlayingContainer">
-            <img id="nowPlayingThumbnail" src="photos/default-music.jpg" class="now-playing-thumbnail" alt="Now Playing">
+            <img id="nowPlayingThumbnail" src="Photos/default-music.jpg" class="now-playing-thumbnail" alt="Now Playing">
             <div class="now-playing-info">
               <div class="now-playing-title" id="nowPlayingTitle">No song selected</div>
               <div class="now-playing-artist" id="nowPlayingArtist"></div>
@@ -1365,7 +1365,7 @@
                   
                   // Show desktop immediately
                   desktop.style.display = 'block';
-                  desktop.style.backgroundImage = `url('photos/Default-Batman.jpg')`;
+                  desktop.style.backgroundImage = `url('Photos/Default-Batman.jpg')`;
                   
                   // Start the welcome text typing animation
                   const message = 'Hello N333MO';
@@ -1623,17 +1623,17 @@
           
           if (fileType === 'image') {
             let imageMap = {
-              'tripout.gif': 'photos/n333mo-tripout.gif',
-              'family_photo.jpg': 'photos/randal.jpg',
-              'batmobile.png': 'photos/fynshi.jpg',
-              'zebra.png': 'photos/zebra.png',
-              'N333MO.png': 'photos/N333MO.jpg',
-              'LOSSAVE.png': 'photos/LOSSAVEUS.jpg',
-              'Blat.png': 'photos/Blattt.png',
-              'Dawg.png': 'photos/Dawg.jpg',
-              'OneOfDem.png': 'photos/JustOneOfDem.jpg',
-              'DownyTwo.png': 'photos/Downy.jpg',
-              'BadBihBeat.png': 'photos/BadBihBeat.jpg'
+              'tripout.gif': 'Photos/n333mo-tripout.gif',
+              'family_photo.jpg': 'Photos/randal.jpg',
+              'batmobile.png': 'Photos/fynshi.jpg',
+              'zebra.png': 'Photos/zebra.png',
+              'N333MO.png': 'Photos/N333MO.jpg',
+              'LOSSAVE.png': 'Photos/LOSSAVEUS.jpg',
+              'Blat.png': 'Photos/Blattt.png',
+              'Dawg.png': 'Photos/Dawg.jpg',
+              'OneOfDem.png': 'Photos/JustOneOfDem.jpg',
+              'DownyTwo.png': 'Photos/Downy.jpg',
+              'BadBihBeat.png': 'Photos/BadBihBeat.jpg'
             };
 
             viewerImage.src = imageMap[fileName] || '/placeholder.svg';
@@ -1641,7 +1641,7 @@
             imageViewer.style.display = 'flex';
 
           } else if (fileType === 'video') {
-            playerVideo.src = `photos/${fileName}`;
+            playerVideo.src = `Photos/${fileName}`;
             videoTitle.textContent = fileName;
             
             if (audioPlayer && !audioPlayer.paused) {
@@ -1764,7 +1764,7 @@
           }
 
           songItem.innerHTML = `
-            <img src="${song.thumbnail || 'photos/default-music.jpg'}" class="song-thumbnail" alt="${song.title}">
+            <img src="${song.thumbnail || 'Photos/default-music.jpg'}" class="song-thumbnail" alt="${song.title}">
             <div class="song-info">
               <div class="song-title">${song.title}</div>
               <div class="song-artist">${song.artist}</div>
@@ -1788,7 +1788,7 @@
 
         nowPlayingTitle.textContent = song.title;
         nowPlayingArtist.textContent = song.artist;
-        nowPlayingThumbnail.src = song.thumbnail || 'photos/default-music.jpg';
+        nowPlayingThumbnail.src = song.thumbnail || 'Photos/default-music.jpg';
         nowPlayingText.textContent = `Playing: ${song.title}`;
       }
 
