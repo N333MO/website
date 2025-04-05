@@ -199,6 +199,25 @@
       background-color: #444;
     }
     
+    /* Visit Counter Styles */
+    .visit-counter {
+      margin-top: 20px;
+      text-align: center;
+      color: #ccc;
+      font-size: 14px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 8px 15px;
+      border-radius: 4px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .counter-value {
+      font-weight: bold;
+      color: #00bfff;
+      margin-left: 5px;
+    }
+    
     /* Welcome Screen Styles */
     .welcome-overlay {
       position: fixed;
@@ -606,7 +625,6 @@
       background-color: rgba(18, 18, 18, 0.95);
       border-radius: 8px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
       display: none;
       color: white;
       z-index: 100;
@@ -802,6 +820,37 @@
       transform: scale(1.05);
       background-color: #fff;
       color: #000;
+    }
+
+    .player-controls .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 10px;
+    }
+
+    .player-controls .volume-slider {
+      width: 80px;
+      height: 4px;
+      background: #535353;
+      border-radius: 2px;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .player-controls .volume-slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .player-controls .volume-icon {
+      color: #b3b3b3;
+      font-size: 14px;
     }
 
     .now-playing-text {
@@ -1022,6 +1071,11 @@
         <input type="password" id="password" placeholder="Enter password">
       </div>
       <button id="loginButton">Login</button>
+    </div>
+    <!-- Visit Counter -->
+    <div class="visit-counter">
+      <span>Total Visits: </span>
+      <span class="counter-value" id="visitCounter">Loading...</span>
     </div>
   </div>
   
@@ -1257,6 +1311,10 @@
             <button class="control-button play-button" id="playButton">▶</button>
             <button class="control-button" id="nextButton">⏭</button>
             <button class="control-button" id="repeatButton">🔁</button>
+            <div class="volume-control">
+              <span class="volume-icon">🔊</span>
+              <input type="range" class="volume-slider" id="musicVolumeSlider" min="0" max="100" value="50">
+            </div>
           </div>
         </div>
       </div>
@@ -1312,6 +1370,19 @@
       const bootAnimation = document.getElementById('bootAnimation');
       const bootStatus = document.getElementById('bootStatus');
       const terminalText = document.getElementById('terminalText');
+      const visitCounter = document.getElementById('visitCounter');
+      
+      // Fetch visitor count from CountAPI
+      // Replace 'n333mo-desktop' with a unique namespace for your counter
+      fetch('https://api.countapi.xyz/hit/n333mo-desktop/visits')
+        .then(response => response.json())
+        .then(data => {
+          visitCounter.textContent = data.value;
+        })
+        .catch(error => {
+          console.error('Error fetching visitor count:', error);
+          visitCounter.textContent = 'Error loading count';
+        });
       
       // Image Viewer Elements
       const imageViewer = document.getElementById('imageViewer');
@@ -1503,8 +1574,8 @@
       const progressBar = document.getElementById('progressBar');
       const progressContainer = document.getElementById('progressContainer');
       const audioPlayer = document.getElementById('audioPlayer');
-      const currentTimeDisplay = document.getElementById('currentTime');
-      const durationTimeDisplay = document.getElementById('durationTime');
+      const currentTimeEl = document.getElementById('currentTime');
+      const totalTimeEl = document.getElementById('totalTime');
       
       // Window Management
       const windows = {
@@ -1758,6 +1829,26 @@
             loadAndPlaySong();
           });
           songList.appendChild(songItem);
+        });
+      }
+
+      // Connect music player volume slider
+      const musicVolumeSlider = document.getElementById('musicVolumeSlider');
+      if (musicVolumeSlider) {
+        musicVolumeSlider.addEventListener('input', (e) => {
+          const value = e.target.value;
+          audioPlayer.volume = value / 100;
+          musicVolume = value / 100;
+          
+          // Update volume icon based on value
+          const volumeIcon = musicPlayer.querySelector('.volume-icon');
+          if (value == 0) {
+            volumeIcon.textContent = '🔇';
+          } else if (value < 50) {
+            volumeIcon.textContent = '🔈';
+          } else {
+            volumeIcon.textContent = '🔊';
+          }
         });
       }
 
